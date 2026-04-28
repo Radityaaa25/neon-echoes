@@ -8,6 +8,7 @@ import { Achievements } from "@/components/Achievements";
 import { MessageOfLove } from "@/components/MessageOfLove";
 import { MomentsGallery } from "@/components/MomentsGallery";
 import { HeartCollage, Footer } from "@/components/HeartCollage";
+import { Memory3DExperience, Enter3DButton } from "@/components/Memory3DExperience";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -25,11 +26,12 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [ready, setReady] = useState(false);
+  const [show3D, setShow3D] = useState(false);
   const { scrollYProgress } = useScroll();
-  // Hero recedes upward as user scrolls past first viewport
-  const heroY = useTransform(scrollYProgress, [0, 0.12], ["0%", "-20%"]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.12], [1, 0.92]);
-  const heroOpacity = useTransform(scrollYProgress, [0.05, 0.13], [1, 0]);
+  // Smoother, longer transition window for the dark→light handoff
+  const heroY = useTransform(scrollYProgress, [0, 0.18], ["0%", "-15%"]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.18], [1, 0.94]);
+  const heroOpacity = useTransform(scrollYProgress, [0.08, 0.2], [1, 0]);
 
   return (
     <>
@@ -41,31 +43,34 @@ function Index() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           className="relative"
+          style={{ willChange: "opacity" }}
         >
-          {/* Hero stays sticky through transition */}
           <motion.div
-            style={{ y: heroY, scale: heroScale, opacity: heroOpacity }}
+            style={{ y: heroY, scale: heroScale, opacity: heroOpacity, willChange: "transform, opacity" }}
             className="sticky top-0 z-10"
           >
             <Hero3D />
           </motion.div>
 
-          {/* Editorial rises */}
           <motion.div
             initial={{ y: 80 }}
             animate={{ y: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-20 bg-background -mt-24 rounded-t-[3rem] md:rounded-t-[4rem] shadow-2xl"
+            style={{ willChange: "transform" }}
           >
             <Chapters />
             <Achievements />
             <MessageOfLove />
             <MomentsGallery />
+            <Enter3DButton onClick={() => setShow3D(true)} />
             <HeartCollage />
             <Footer />
           </motion.div>
         </motion.div>
       )}
+
+      <Memory3DExperience open={show3D} onClose={() => setShow3D(false)} />
     </>
   );
 }
