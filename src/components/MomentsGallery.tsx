@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gift, X } from "lucide-react";
 import p1 from "@/assets/photo-1.jpg";
@@ -30,36 +30,50 @@ const items: Item[] = [
 ];
 
 function Confetti() {
-  const pieces = Array.from({ length: 60 });
+  // Pre-compute particle data once (avoid re-randomising per render).
+  // Reduced count + GPU-friendly transforms for smoother frames.
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 28 }).map(() => ({
+        left: Math.random() * 100,
+        delay: Math.random() * 0.25,
+        dur: 1.1 + Math.random() * 1,
+        size: 14 + Math.random() * 12,
+        xDrift: (Math.random() - 0.5) * 500,
+        yEnd: 25 + Math.random() * 70,
+        rot: Math.random() * 360,
+      })),
+    []
+  );
   return (
     <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
-      {pieces.map((_, i) => {
-        const left = Math.random() * 100;
-        const delay = Math.random() * 0.3;
-        const dur = 1.2 + Math.random() * 1.2;
-        const size = 14 + Math.random() * 14;
-        const rot = Math.random() * 360;
-        return (
-          <motion.div
-            key={i}
-            initial={{ y: "50vh", x: 0, opacity: 1, scale: 0, rotate: 0 }}
-            animate={{
-              y: ["50vh", `${20 + Math.random() * 80}vh`],
-              x: (Math.random() - 0.5) * 600,
-              opacity: [1, 1, 0],
-              scale: [0, 1, 1],
-              rotate: rot + 360,
-            }}
-            transition={{ duration: dur, delay, ease: "easeOut" }}
-            className="absolute"
-            style={{ left: `${left}%`, top: 0, width: size, height: size }}
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="text-primary w-full h-full drop-shadow-[0_0_8px_rgba(255,40,120,0.8)]">
-              <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" />
-            </svg>
-          </motion.div>
-        );
-      })}
+      {pieces.map((p, i) => (
+        <motion.div
+          key={i}
+          initial={{ y: "50vh", x: 0, opacity: 1, scale: 0, rotate: 0 }}
+          animate={{
+            y: ["50vh", `${p.yEnd}vh`],
+            x: p.xDrift,
+            opacity: [1, 1, 0],
+            scale: [0, 1, 1],
+            rotate: p.rot + 360,
+          }}
+          transition={{ duration: p.dur, delay: p.delay, ease: "easeOut" }}
+          className="absolute"
+          style={{
+            left: `${p.left}%`,
+            top: 0,
+            width: p.size,
+            height: p.size,
+            willChange: "transform, opacity",
+            transform: "translate3d(0,0,0)",
+          }}
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" className="text-primary w-full h-full drop-shadow-[0_0_6px_rgba(255,40,120,0.8)]">
+            <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" />
+          </svg>
+        </motion.div>
+      ))}
     </div>
   );
 }
