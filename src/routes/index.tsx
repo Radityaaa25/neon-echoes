@@ -33,11 +33,11 @@ function Index() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showMist, setShowMist] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { scrollYProgress } = useScroll();
-  // Smoother, longer transition window for the dark→light handoff
-  const heroY = useTransform(scrollYProgress, [0, 0.18], ["0%", "-15%"]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.18], [1, 0.94]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.22], [1, 0]);
+  const { scrollY } = useScroll();
+  // Use absolute scroll pixels for stable initial state on mobile browsers.
+  const heroY = useTransform(scrollY, [0, 420], ["0%", "-15%"]);
+  const heroScale = useTransform(scrollY, [0, 420], [1, 0.94]);
+  const heroOpacity = useTransform(scrollY, [0, 520], [1, 0]);
 
   useEffect(() => {
     if (!ready) return;
