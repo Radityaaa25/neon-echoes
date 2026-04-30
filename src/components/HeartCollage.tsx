@@ -205,7 +205,7 @@ export function Footer() {
   return (
     <footer className="bg-black text-white/70 py-20 px-6 text-center border-t border-white/10">
       <p className="font-script text-5xl md:text-6xl text-neon mb-6">Happy Birthday, My Love</p>
-      <p className="text-xs tracking-[0.3em] uppercase">Dibuat khusus buat kamu · MMXXVI</p>
+      <p className="text-xs tracking-[0.3em] uppercase">Dibuat khusus buat kamu · GHINNA AZZAHRAH</p>
     </footer>
   );
 }
