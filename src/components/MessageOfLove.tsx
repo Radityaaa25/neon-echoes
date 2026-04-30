@@ -9,7 +9,7 @@ export function MessageOfLove() {
         viewport={{ once: true }}
         className="text-xs tracking-[0.4em] text-neutral-500 uppercase mb-6"
       >
-        — A Message of Love
+        — Birthday Note
       </motion.p>
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
@@ -18,7 +18,7 @@ export function MessageOfLove() {
         transition={{ duration: 0.9 }}
         className="font-serif italic text-5xl md:text-7xl lg:text-8xl text-foreground leading-[1.05] mb-12"
       >
-        To My Favorite Person
+        Untuk Cewek Favoritku
       </motion.h2>
       <motion.div
         initial={{ opacity: 0 }}
@@ -28,21 +28,19 @@ export function MessageOfLove() {
         className="font-serif text-lg md:text-xl text-foreground/85 leading-relaxed space-y-6 text-left md:text-center"
       >
         <p>
-          Eighteen years feels like a single, perfect breath — and somehow,
-          a thousand stories at once. You've grown into someone who turns
-          ordinary days into ones worth remembering.
+          Happy birthday, Zalaaa. Hari ini bukan cuma soal nambah umur, tapi juga nambah chapter
+          baru buat semua mimpi, rencana, dan hal-hal bagus yang lagi nunggu kamu di depan.
         </p>
         <p>
-          Thank you for the laughter that doubles me over, for the silences
-          that feel like home, and for the way you make even the smallest
-          moments shimmer.
+          Makasih udah jadi kamu: hangat, kuat, lucu, dan selalu bisa bikin hariku balik tenang
+          cuma lewat obrolan sederhana.
         </p>
         <p>
-          Whatever the next chapters hold, know this: you'll never write
-          them alone.
+          Semoga tahun ini ngasih kamu lebih banyak alasan buat senyum, lebih banyak peluang buat
+          menang, dan lebih banyak momen yang bikin kamu bangga sama diri sendiri.
         </p>
         <p className="font-script text-3xl md:text-4xl text-primary pt-6">
-          With every piece of my heart.
+          I am always on your team.
         </p>
       </motion.div>
     </section>

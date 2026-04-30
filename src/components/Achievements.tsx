@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import { BookOpen, Heart, Sparkles, Coffee, Camera, Star, Smile, Music } from "lucide-react";
 
 const items = [
-  { icon: BookOpen, title: "Master Learner", desc: "Curiosity, every single day." },
-  { icon: Heart, title: "Best Listener", desc: "Holds space like no one else." },
-  { icon: Sparkles, title: "Light Bringer", desc: "A room is brighter with you." },
-  { icon: Coffee, title: "Cozy Companion", desc: "Quiet mornings, perfect talks." },
-  { icon: Camera, title: "Memory Maker", desc: "Always the first to capture joy." },
-  { icon: Star, title: "Quiet Star", desc: "Shines without needing to." },
-  { icon: Smile, title: "Joy Architect", desc: "Builds smiles for a living." },
-  { icon: Music, title: "Soundtrack", desc: "Your laugh, on repeat." },
+  { icon: BookOpen, title: "Growth Mode On", desc: "Versi kamu tiap tahun makin keren." },
+  { icon: Heart, title: "Heart Warmer", desc: "Kamu selalu bikin suasana jadi nyaman." },
+  { icon: Sparkles, title: "Main Character", desc: "Masuk ruangan, langsung auto bright." },
+  { icon: Coffee, title: "Cozy Partner", desc: "Ngobrol random aja udah bikin happy." },
+  { icon: Camera, title: "Moment Keeper", desc: "Jago banget simpan momen kecil jadi berarti." },
+  { icon: Star, title: "Natural Glow", desc: "Bersinar tanpa perlu capek jadi orang lain." },
+  { icon: Smile, title: "Mood Booster", desc: "Senyummu selalu jadi recharge terbaik." },
+  { icon: Music, title: "My Favorite Track", desc: "Ketawamu masih nomor satu di playlist hati." },
 ];
 
 export function Achievements() {
@@ -22,7 +22,7 @@ export function Achievements() {
           viewport={{ once: true }}
           className="text-xs tracking-[0.4em] text-neutral-500 uppercase mb-4"
         >
-          — The Achievement Grid
+          — Birthday Traits
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -30,7 +30,7 @@ export function Achievements() {
           viewport={{ once: true }}
           className="font-serif italic text-5xl md:text-7xl text-foreground mb-20"
         >
-          Quiet superpowers.
+          Hal-hal keren dari kamu.
         </motion.h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">

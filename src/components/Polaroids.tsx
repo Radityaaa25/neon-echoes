@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import p1 from "@/assets/photo-1.jpg";
-import p2 from "@/assets/photo-2.jpg";
-import p3 from "@/assets/photo-3.jpg";
-import p5 from "@/assets/photo-5.jpg";
-import p6 from "@/assets/photo-6.jpg";
-import p7 from "@/assets/photo-7.jpg";
+import m2 from "@/assets/momen/2.jpeg";
+import m11 from "@/assets/momen/11.jpeg";
+import m17 from "@/assets/momen/17.jpeg";
+import s1 from "@/assets/single/1.jpeg";
+import s4 from "@/assets/single/4.jpeg";
+import s8 from "@/assets/single/8.jpeg";
 
 const polaroids = [
-  { src: p1, caption: "Golden hour", x: "8%", y: "18%", rot: -8 },
-  { src: p2, caption: "Make a wish", x: "78%", y: "12%", rot: 6 },
-  { src: p3, caption: "Stargazing", x: "5%", y: "62%", rot: 5 },
-  { src: p5, caption: "Summer", x: "82%", y: "58%", rot: -6 },
-  { src: p6, caption: "Confetti", x: "20%", y: "78%", rot: 9 },
-  { src: p7, caption: "Coffee talks", x: "70%", y: "78%", rot: -4 },
+  { src: m11, caption: "Golden hour", x: "8%", y: "18%", rot: -8 },
+  { src: s4, caption: "Make a wish", x: "78%", y: "12%", rot: 6 },
+  { src: m2, caption: "Stargazing", x: "5%", y: "62%", rot: 5 },
+  { src: s8, caption: "Summer", x: "82%", y: "58%", rot: -6 },
+  { src: m17, caption: "Confetti", x: "20%", y: "78%", rot: 9 },
+  { src: s1, caption: "Coffee talks", x: "70%", y: "78%", rot: -4 },
 ];
 
 export function Polaroids() {

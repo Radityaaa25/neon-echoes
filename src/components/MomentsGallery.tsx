@@ -1,32 +1,45 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gift, X } from "lucide-react";
-import p1 from "@/assets/photo-1.jpg";
-import p2 from "@/assets/photo-2.jpg";
-import p3 from "@/assets/photo-3.jpg";
-import p4 from "@/assets/photo-4.jpg";
-import p5 from "@/assets/photo-5.jpg";
-import p6 from "@/assets/photo-6.jpg";
-import p7 from "@/assets/photo-7.jpg";
-import p8 from "@/assets/photo-8.jpg";
+import { createPortal } from "react-dom";
+import s1 from "@/assets/single/1.jpeg";
+import s2 from "@/assets/single/2.jpeg";
+import s3 from "@/assets/single/3.jpeg";
+import s4 from "@/assets/single/4.jpeg";
+import s5 from "@/assets/single/5.jpeg";
+import s6 from "@/assets/single/6.jpeg";
+import s7 from "@/assets/single/7.jpeg";
+import s8 from "@/assets/single/8.jpeg";
+import s9 from "@/assets/single/9.jpeg";
+import s10 from "@/assets/single/10.jpeg";
 
 type Item =
   | { type: "img"; src: string; h: string }
   | { type: "gift"; surprise: string; img: string; h: string };
 
 const items: Item[] = [
-  { type: "img", src: p1, h: "row-span-2" },
-  { type: "img", src: p2, h: "" },
-  { type: "gift", surprise: "You make every birthday feel like a movie scene.", img: p6, h: "" },
-  { type: "img", src: p3, h: "row-span-2" },
-  { type: "img", src: p7, h: "" },
-  { type: "img", src: p4, h: "" },
-  { type: "gift", surprise: "Our coffee talks are my favorite ritual.", img: p7, h: "row-span-2" },
-  { type: "img", src: p5, h: "" },
-  { type: "img", src: p6, h: "" },
-  { type: "img", src: p8, h: "row-span-2" },
-  { type: "gift", surprise: "Brighter than every firework, always.", img: p8, h: "" },
-  { type: "img", src: p2, h: "" },
+  { type: "img", src: s1, h: "row-span-2" },
+  { type: "img", src: s2, h: "" },
+  {
+    type: "gift",
+    surprise: "Setiap ulang tahun jadi lebih seru sejak ada kamu di hidupku.",
+    img: s6,
+    h: "",
+  },
+  { type: "img", src: s3, h: "row-span-2" },
+  { type: "img", src: s7, h: "" },
+  { type: "img", src: s4, h: "" },
+  {
+    type: "gift",
+    surprise: "Ngobrol sama kamu selalu jadi part terbaik di hari-hariku.",
+    img: s8,
+    h: "row-span-2",
+  },
+  { type: "img", src: s5, h: "" },
+  { type: "img", src: s9, h: "" },
+  { type: "img", src: s10, h: "row-span-2" },
+  { type: "gift", surprise: "Glow kamu masih ngalahin kembang api mana pun.", img: s4, h: "" },
+  { type: "img", src: s6, h: "" },
 ];
 
 function Confetti() {
@@ -43,7 +56,7 @@ function Confetti() {
         yEnd: 25 + Math.random() * 70,
         rot: Math.random() * 360,
       })),
-    []
+    [],
   );
   return (
     <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
@@ -69,7 +82,11 @@ function Confetti() {
             transform: "translate3d(0,0,0)",
           }}
         >
-          <svg viewBox="0 0 24 24" fill="currentColor" className="text-primary w-full h-full drop-shadow-[0_0_6px_rgba(255,40,120,0.8)]">
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="text-primary w-full h-full drop-shadow-[0_0_6px_rgba(255,40,120,0.8)]"
+          >
             <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" />
           </svg>
         </motion.div>
@@ -81,10 +98,16 @@ function Confetti() {
 export function MomentsGallery() {
   const [opened, setOpened] = useState<number | null>(null);
   const [confetti, setConfetti] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const openGift = (i: number) => {
+    if (items[i].type !== "gift") return;
     setConfetti(true);
-    setTimeout(() => setOpened(i), 700);
+    setOpened(i);
     setTimeout(() => setConfetti(false), 2200);
   };
 
@@ -97,7 +120,7 @@ export function MomentsGallery() {
           viewport={{ once: true }}
           className="text-xs tracking-[0.4em] text-neutral-500 uppercase mb-4"
         >
-          — Moments
+          — Birthday Moments
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -105,10 +128,10 @@ export function MomentsGallery() {
           viewport={{ once: true }}
           className="font-serif italic text-5xl md:text-7xl text-foreground mb-4"
         >
-          Open the boxes.
+          Buka kotaknya, ada pesan kecil.
         </motion.h2>
         <p className="text-muted-foreground mb-16 max-w-md">
-          Click any gift box to unwrap a tiny surprise wrapped in confetti.
+          Klik gift box mana aja buat buka mini surprise spesial ulang tahun kamu.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-4">
@@ -153,40 +176,46 @@ export function MomentsGallery() {
 
       {confetti && <Confetti />}
 
-      <AnimatePresence>
-        {opened !== null && items[opened].type === "gift" && (
-          <motion.div
-            className="fixed inset-0 z-[70] bg-black/85 backdrop-blur-md flex items-center justify-center p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpened(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.6, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.6, opacity: 0 }}
-              className="bg-background max-w-lg w-full p-2 shadow-neon"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setOpened(null)}
-                className="absolute top-6 right-6 text-white/80 hover:text-white"
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {opened !== null && items[opened].type === "gift" && (
+              <motion.div
+                className="fixed inset-0 z-[999] bg-black/85 backdrop-blur-md flex items-center justify-center p-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={(e) => {
+                  if (e.target === e.currentTarget) setOpened(null);
+                }}
               >
-                <X />
-              </button>
-              <img
-                src={(items[opened] as { img: string }).img}
-                alt=""
-                className="w-full aspect-video object-cover"
-              />
-              <p className="font-serif italic text-2xl md:text-3xl text-foreground p-8 text-center">
-                "{(items[opened] as { surprise: string }).surprise}"
-              </p>
-            </motion.div>
-          </motion.div>
+                <motion.div
+                  initial={{ scale: 0.6, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.6, opacity: 0 }}
+                  className="relative bg-background max-w-lg w-full p-2 shadow-neon"
+                >
+                  <button
+                    onClick={() => setOpened(null)}
+                    className="absolute top-4 right-4 z-10 p-1 bg-black/35 text-white hover:bg-black/55 transition-colors"
+                    aria-label="Close"
+                  >
+                    <X />
+                  </button>
+                  <img
+                    src={(items[opened] as { img: string }).img}
+                    alt=""
+                    className="w-full aspect-video object-cover"
+                  />
+                  <p className="font-serif italic text-2xl md:text-3xl text-foreground p-8 text-center">
+                    "{(items[opened] as { surprise: string }).surprise}"
+                  </p>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </section>
   );
 }

@@ -49,9 +49,11 @@ export function MatrixPreloader({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     const t1 = setTimeout(() => setCount(2), 1000);
     const t2 = setTimeout(() => setCount(1), 2000);
-    const t3 = setTimeout(() => setVisible(false), 3000);
-    const t4 = setTimeout(() => onDone(), 3700);
-    return () => [t1, t2, t3, t4].forEach(clearTimeout);
+    const t3 = setTimeout(() => {
+      setVisible(false);
+      onDone();
+    }, 3000);
+    return () => [t1, t2, t3].forEach(clearTimeout);
   }, [onDone]);
 
   return (
@@ -81,7 +83,7 @@ export function MatrixPreloader({ onDone }: { onDone: () => void }) {
               transition={{ delay: 0.4 }}
               className="font-sans text-xl md:text-3xl font-bold tracking-[0.3em] text-white text-glow-neon uppercase"
             >
-              A Digital Journey Begins
+              Birthday Experience Loading
             </motion.h1>
           </div>
         </motion.div>

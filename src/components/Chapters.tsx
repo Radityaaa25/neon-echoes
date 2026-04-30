@@ -1,12 +1,27 @@
 import { motion } from "framer-motion";
-import p1 from "@/assets/photo-1.jpg";
-import p3 from "@/assets/photo-3.jpg";
-import p7 from "@/assets/photo-7.jpg";
+import saat from "@/assets/momen/saat.jpeg";
+import tawamu from "@/assets/momen/tawamu.jpeg";
+import bahkan from "@/assets/momen/bahkan.mp4";
 
 const chapters = [
-  { quote: "When I met you, the world tilted just enough to make sense.", img: p1, label: "Chapter I" },
-  { quote: "Our biggest laugh still echoes in rooms we've never been to.", img: p7, label: "Chapter II" },
-  { quote: "Even quiet nights with you sound like a favorite song.", img: p3, label: "Chapter III" },
+  {
+    quote: "Sejak kenal kamu, hari-hari biasa langsung terasa kayak hari spesial.",
+    media: saat,
+    type: "img" as const,
+    label: "Bab I",
+  },
+  {
+    quote: "Tawamu selalu jadi suara favorit yang bikin semuanya jadi lebih ringan.",
+    media: tawamu,
+    type: "img" as const,
+    label: "Bab II",
+  },
+  {
+    quote: "Bahkan momen paling sederhana bareng kamu rasanya tetap istimewa.",
+    media: bahkan,
+    type: "video" as const,
+    label: "Bab III",
+  },
 ];
 
 export function Chapters() {
@@ -18,7 +33,7 @@ export function Chapters() {
         viewport={{ once: true }}
         className="text-xs tracking-[0.4em] text-neutral-500 uppercase mb-4"
       >
-        — The Chapters
+        — Cerita Kita
       </motion.p>
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
@@ -27,7 +42,7 @@ export function Chapters() {
         transition={{ delay: 0.1 }}
         className="font-serif italic text-5xl md:text-7xl text-foreground mb-24"
       >
-        Pages we wrote together.
+        Tiga scene favorit di hari ulang tahunmu.
       </motion.h2>
 
       <div className="space-y-32">
@@ -47,12 +62,24 @@ export function Chapters() {
               </blockquote>
             </div>
             <div className="md:col-span-5">
-              <img
-                src={c.img}
-                alt=""
-                loading="lazy"
-                className="w-full aspect-[4/5] object-cover shadow-editorial"
-              />
+              {c.type === "img" ? (
+                <img
+                  src={c.media}
+                  alt=""
+                  loading="lazy"
+                  className="w-full aspect-[4/5] object-cover shadow-editorial"
+                />
+              ) : (
+                <video
+                  src={c.media}
+                  className="w-full aspect-[4/5] object-cover shadow-editorial"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                />
+              )}
             </div>
           </motion.div>
         ))}

@@ -154,11 +154,17 @@
 }
 
 @layer base {
+  html {
+    overflow-x: hidden;
+    scrollbar-gutter: stable both-edges;
+  }
+
   * {
     border-color: var(--color-border);
   }
 
   body {
+    overflow-x: hidden;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);

@@ -27,10 +27,10 @@ export function Hero3D() {
         className="absolute top-0 inset-x-0 z-30 px-6 md:px-12 py-6 flex items-center justify-between"
       >
         <div className="font-sans text-sm tracking-[0.3em] text-white/80 uppercase">
-          <span className="text-neon">●</span> Tribute · 18
+          <span className="text-neon">●</span> Birthday Girl Zalaaa
         </div>
         <nav className="hidden md:flex items-center gap-8 text-sm text-white/70 uppercase tracking-widest">
-          {["Intro", "Chapters", "Message", "Moments"].map((l) => (
+          {["Intro", "Cerita", "Ucapan", "Momen"].map((l) => (
             <a key={l} href={`#${l.toLowerCase()}`} className="hover:text-neon transition-colors">
               {l}
             </a>
@@ -58,7 +58,7 @@ export function Hero3D() {
           transition={{ delay: 0.8 }}
           className="font-sans text-xs md:text-sm tracking-[0.5em] text-neon uppercase mb-6"
         >
-          A Constellation of Memories
+          Birthday Universe
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -66,8 +66,8 @@ export function Hero3D() {
           transition={{ delay: 1, duration: 1 }}
           className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-normal italic max-w-4xl leading-[0.95]"
         >
-          18 Years <br />
-          <span className="text-neon">of Wonders</span>
+          Happy Birthday, Zalaaa <br />
+          <span className="text-neon">You shine the brightest</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -75,7 +75,7 @@ export function Hero3D() {
           transition={{ delay: 1.5 }}
           className="mt-10 font-sans text-xs tracking-[0.3em] text-white/50 uppercase"
         >
-          Scroll to begin ↓
+          Scroll buat mulai kejutan ↓
         </motion.p>
       </div>
 

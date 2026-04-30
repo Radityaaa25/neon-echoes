@@ -5,24 +5,32 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Sparkles } from "lucide-react";
 import * as THREE from "three";
-import p1 from "@/assets/photo-1.jpg";
-import p2 from "@/assets/photo-2.jpg";
-import p3 from "@/assets/photo-3.jpg";
-import p4 from "@/assets/photo-4.jpg";
-import p5 from "@/assets/photo-5.jpg";
-import p6 from "@/assets/photo-6.jpg";
-import p7 from "@/assets/photo-7.jpg";
-import p8 from "@/assets/photo-8.jpg";
+import m1 from "@/assets/momen3D/AbisBerantem.jpeg";
+import m2 from "@/assets/momen3D/AbisBerantemHebatIni.jpeg";
+import m3 from "@/assets/momen3D/AwwwFirsssttttttttttDateeee.jpeg";
+import m4 from "@/assets/momen3D/FIrstDateeee.jpeg";
+import m5 from "@/assets/momen3D/ItuBibirnyaWoy.jpeg";
+import m6 from "@/assets/momen3D/PapDiMotorr.jpeg";
+import m7 from "@/assets/momen3D/PasBukberrr.jpeg";
+import m8 from "@/assets/momen3D/PertamaKaliPeganganNihhehe.jpeg";
+import m9 from "@/assets/momen3D/PetamaKaliPhotoboothTerusPelukanHihi.jpeg";
+import m10 from "@/assets/momen3D/PhotoboothKeduaKaliKaloGaSalah.jpeg";
+import m11 from "@/assets/momen3D/WaktuDoubleDateBarengIchadanZidan.jpeg";
+import m12 from "@/assets/momen3D/WaktuNyampelinDedeNangis.jpeg";
 
 const PHOTOS = [
-  { src: p1, caption: "Golden hour" },
-  { src: p2, caption: "Make a wish" },
-  { src: p3, caption: "Stargazing" },
-  { src: p4, caption: "Sunset drive" },
-  { src: p5, caption: "Summer days" },
-  { src: p6, caption: "Confetti rain" },
-  { src: p7, caption: "Coffee talks" },
-  { src: p8, caption: "Quiet moments" },
+  { src: m1, caption: "Abis Berantem" },
+  { src: m2, caption: "Abis Berantem Hebat Ini" },
+  { src: m3, caption: "Awww Firssstttttttttt Dateeee" },
+  { src: m4, caption: "FIrst Dateeee" },
+  { src: m5, caption: "Itu Bibirnya Woy" },
+  { src: m6, caption: "Pap Di Motorr" },
+  { src: m7, caption: "Pas Bukberrr" },
+  { src: m8, caption: "Pertama Kali Pegangan Nihhehe" },
+  { src: m9, caption: "Petama Kali Photobooth Terus Pelukan Hihi" },
+  { src: m10, caption: "Photobooth Kedua Kali Kalo Ga Salah" },
+  { src: m11, caption: "Waktu Double Date Bareng Ichadan Zidan" },
+  { src: m12, caption: "Waktu Nyampelin Dede Nangis" },
 ];
 
 // Fibonacci sphere placement for even distribution around the orb
@@ -194,7 +202,11 @@ function CameraRig({
 
 export function Memory3DExperience({ open, onClose }: { open: boolean; onClose: () => void }) {
   const positions = useMemo(() => spherePoints(PHOTOS.length, 2.6), []);
-  const [focus, setFocus] = useState<{ pos: THREE.Vector3; target: THREE.Vector3; index: number } | null>(null);
+  const [focus, setFocus] = useState<{
+    pos: THREE.Vector3;
+    target: THREE.Vector3;
+    index: number;
+  } | null>(null);
 
   // Lock body scroll while open
   useEffect(() => {
@@ -253,12 +265,7 @@ export function Memory3DExperience({ open, onClose }: { open: boolean; onClose: 
             <CameraRig focus={focus} onArrived={() => {}} />
 
             <EffectComposer>
-              <Bloom
-                intensity={1.1}
-                luminanceThreshold={0.2}
-                luminanceSmoothing={0.9}
-                mipmapBlur
-              />
+              <Bloom intensity={1.1} luminanceThreshold={0.2} luminanceSmoothing={0.9} mipmapBlur />
             </EffectComposer>
           </Canvas>
 
@@ -266,7 +273,7 @@ export function Memory3DExperience({ open, onClose }: { open: boolean; onClose: 
           <div className="pointer-events-none absolute inset-0 z-10 flex flex-col">
             <div className="flex items-center justify-between p-6 md:p-10">
               <div className="pointer-events-auto text-white/80 text-xs tracking-[0.4em] uppercase">
-                <span className="text-neon">●</span> Memory Space
+                <span className="text-neon">●</span> Birthday Space
               </div>
               <div className="flex gap-3 pointer-events-auto">
                 {focus && (
@@ -281,15 +288,15 @@ export function Memory3DExperience({ open, onClose }: { open: boolean; onClose: 
                   onClick={onClose}
                   className="flex items-center gap-2 px-4 py-2 border border-white/30 text-white text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-colors backdrop-blur-sm"
                 >
-                  <X className="w-3.5 h-3.5" /> Exit
+                  <X className="w-3.5 h-3.5" /> Close
                 </button>
               </div>
             </div>
 
             <div className="mt-auto p-6 md:p-10 text-white/60 text-xs tracking-[0.3em] uppercase text-center">
               {focus
-                ? `“${PHOTOS[focus.index].caption}” — click reset to drift back`
-                : "Drag to rotate · Scroll to zoom · Click a photo to focus"}
+                ? `“${PHOTOS[focus.index].caption}” - click reset to float back`
+                : "Drag to rotate · Scroll to zoom · Click photo to focus"}
             </div>
           </div>
         </motion.div>
@@ -316,7 +323,7 @@ export function Enter3DButton({ onClick }: { onClick: () => void }) {
         viewport={{ once: true }}
         className="relative font-serif italic text-4xl md:text-6xl text-white mb-10"
       >
-        Step inside the memory space.
+        Coba Masuk Deh...
       </motion.h2>
       <motion.button
         onClick={onClick}
