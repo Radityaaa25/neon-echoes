@@ -31,14 +31,20 @@ function Index() {
   const [show3D, setShow3D] = useState(false);
   const [needsUserGesture, setNeedsUserGesture] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showMist, setShowMist] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const { scrollYProgress } = useScroll();
   // Smoother, longer transition window for the dark→light handoff
   const heroY = useTransform(scrollYProgress, [0, 0.18], ["0%", "-15%"]);
   const heroScale = useTransform(scrollYProgress, [0, 0.18], [1, 0.94]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.22], [1, 0]);
-  // Mist-like fade effect for smoother disappearance
-  const mistOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+
+  useEffect(() => {
+    if (!ready) return;
+    setShowMist(true);
+    const timer = setTimeout(() => setShowMist(false), 900);
+    return () => clearTimeout(timer);
+  }, [ready]);
 
   useEffect(() => {
     if (!ready || !audioRef.current) return;
@@ -123,10 +129,14 @@ function Index() {
           >
             <Hero3D />
             {/* Mist overlay that fades away smoothly */}
-            <motion.div
-              style={{ opacity: mistOpacity }}
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white/40 pointer-events-none z-20"
-            />
+            {showMist && (
+              <motion.div
+                initial={{ opacity: 0.65 }}
+                animate={{ opacity: 0 }}
+                transition={{ duration: 0.9, ease: "easeOut" }}
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-white/15 to-white/30 pointer-events-none z-20"
+              />
+            )}
           </motion.div>
 
           <motion.div
